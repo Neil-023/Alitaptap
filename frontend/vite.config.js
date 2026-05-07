@@ -18,7 +18,7 @@ export default defineConfig({
         background_color: "#0a2342",
         display: "standalone",
         start_url: "/Alitaptap/",
-        scope: "/",
+        scope: "/Alitaptap/",
         icons: [
           {
             src: "logo.png",
