@@ -13,16 +13,18 @@ app = FastAPI(title="FlameScore AI Backend")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "*"
+        "https://neil-023.github.io",  
+        "https://alitaptap.mooo.com", 
+        "http://localhost:5173",
+        "http://localhost:3003",
+        "http://localhost:8003",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# 2. Initialize Gemini Client
-# It automatically picks up the "GEMINI_API_KEY" environment variable.
-# DO NOT hardcode your API key here for security reasons.
+# 2. Initialize Gemini Client   
 client = genai.Client()
 
 SYSTEM_PROMPT = """
