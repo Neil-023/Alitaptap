@@ -17,7 +17,7 @@ export default defineConfig({
         theme_color: "#0a2342",
         background_color: "#0a2342",
         display: "standalone",
-        start_url: "/",
+        start_url: "/Alitaptap/",
         scope: "/",
         icons: [
           {
@@ -30,7 +30,7 @@ export default defineConfig({
             src: "logo.png",
             sizes: "512x512",
             type: "image/png",
-            purpose: "any maskable"
+            purpose: "any"
           }
         ]
       }
