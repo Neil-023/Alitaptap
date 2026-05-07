@@ -132,22 +132,28 @@ function App() {
     const formData = new FormData()
     formData.append('file', captureFile)
 
-    const response = await fetch(`${API_BASE}/api/assess`, {
-      method: 'POST',
-      body: formData,
-    })
+    try {
+      const response = await fetch(`${API_BASE}/api/assess`, {
+        method: 'POST',
+        body: formData,
+      })
 
-    const payload = await response.json().catch(() => null)
+      const payload = await response.json().catch(() => null)
 
-    if (!response.ok) {
-      const message = payload?.detail || 'Unable to analyze image.'
+      if (!response.ok) {
+        const message = payload?.detail || `HTTP ${response.status} ${response.statusText || 'error'}`
+        setAnalysisError(message)
+        throw new Error(message)
+      }
+
+      setAnalysis(payload)
+      setAnalysisError(null)
+      return payload
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error)
       setAnalysisError(message)
-      throw new Error(message)
+      throw error instanceof Error ? error : new Error(message)
     }
-
-    setAnalysis(payload)
-    setAnalysisError(null)
-    return payload
   }, [captureFile])
 
   const mappedAnalysis = useMemo(() => {

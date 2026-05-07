@@ -79,6 +79,14 @@
   border-radius: 999px;
   background: #f19e61;
   color: #ffffff;
+.errorDebug {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  text-align: center;
+  word-break: break-word;
+}
   font-size: 12px;
   font-weight: 700;
   padding: 8px 16px;

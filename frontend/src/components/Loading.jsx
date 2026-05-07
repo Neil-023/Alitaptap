@@ -13,6 +13,7 @@ const Loading = ({ nextPath = '/dashboard', onAnalyze, errorMessage }) => {
   const navigate = useNavigate();
   const [messageIndex, setMessageIndex] = useState(0);
   const [error, setError] = useState(errorMessage || '');
+  const [debugError, setDebugError] = useState(errorMessage || '');
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -39,6 +40,7 @@ const Loading = ({ nextPath = '/dashboard', onAnalyze, errorMessage }) => {
         if (isActive) {
           const message = err instanceof Error ? err.message : 'Unable to analyze image.';
           setError(message);
+          setDebugError(err instanceof Error ? `${err.name}: ${err.message}` : String(err));
         }
       }
     };
@@ -52,6 +54,7 @@ const Loading = ({ nextPath = '/dashboard', onAnalyze, errorMessage }) => {
 
   useEffect(() => {
     setError(errorMessage || '');
+    setDebugError(errorMessage || '');
   }, [errorMessage]);
 
   return (
@@ -67,6 +70,7 @@ const Loading = ({ nextPath = '/dashboard', onAnalyze, errorMessage }) => {
           {error ? (
             <div className={styles.error}>
               <p className={styles.errorText}>{error}</p>
+              {debugError ? <p className={styles.errorDebug}>{debugError}</p> : null}
               <button
                 type="button"
                 className={styles.errorButton}
