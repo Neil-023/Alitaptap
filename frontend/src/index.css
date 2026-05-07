@@ -38,13 +38,6 @@ html {
   }
 }
 
-/* Boost base font-size on narrow phones for consistent sizing */
-@media (max-width: 420px) {
-  html {
-    font-size: 20px; /* increases rem sizes across the app */
-  }
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
     --text: #9ca3af;
