@@ -45,8 +45,7 @@ jobs:
           ENVIRONMENT=production
           EOF
 
-          # Use the full path and explicit 'compose' command
-          # This avoids any alias issues on the Oracle server
-          /usr/bin/docker compose -f docker-compose.prod.yml up -d --build --force-recreate --remove-orphans
+          # Use 'docker compose' directly now that the plugin is installed
+          docker compose -f docker-compose.prod.yml up -d --build --force-recreate --remove-orphans
           
           docker image prune -f
