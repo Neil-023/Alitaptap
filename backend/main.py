@@ -17,6 +17,7 @@ app.add_middleware(
         "https://alitaptap.mooo.com",  # Your new backend domain
         "http://localhost:5173",       # For local development
         "http://localhost:8003",
+        "http://localhost:3003",
     ],
     allow_credentials=True,
     allow_methods=["*"],
