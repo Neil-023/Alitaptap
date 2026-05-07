@@ -38,16 +38,15 @@ jobs:
           set -euo pipefail
           cd /home/ubuntu/alitaptap
 
-          # Inject secrets into the .env file
+          # Inject secrets
           cat > backend/.env <<EOF
           GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
           ALLOWED_ORIGINS=${{ secrets.ALLOWED_ORIGINS }}
           ENVIRONMENT=production
           EOF
 
-          # FORCED FIX: We use 'docker compose' (space) to avoid the V1 KeyError.
-          # Added --force-recreate to bypass the 'ContainerConfig' metadata bug.
-          docker compose -f docker-compose.prod.yml up -d --build --force-recreate --remove-orphans
+          # Use the full path and explicit 'compose' command
+          # This avoids any alias issues on the Oracle server
+          /usr/bin/docker compose -f docker-compose.prod.yml up -d --build --force-recreate --remove-orphans
           
-          # Clean up old images to save space on your limited 480MB RAM server
           docker image prune -f
