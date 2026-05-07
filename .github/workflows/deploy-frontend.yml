@@ -37,8 +37,9 @@ jobs:
     - name: Build frontend
       working-directory: frontend
       env:
-        # This is your Cloudflare Tunnel or Ngrok URL
+        # Match the variable name your React code expects (VITE_API_URL)
         VITE_API_URL: ${{ secrets.ALITAPTAP_API_URL }}
+        VITE_BASE_PATH: ${{ env.VITE_BASE_PATH }}
       run: |
         npm ci
         npm run build
