@@ -45,8 +45,17 @@ jobs:
           ENVIRONMENT=production
           EOF
 
-          # Standard Docker Compose Deploy
-          docker compose -f docker-compose.prod.yml up -d --build --remove-orphans
+          # SMART DOCKER COMPOSE DETECTION
+          if docker compose version >/dev/null 2>&1; then
+            COMPOSE_CMD="docker compose"
+          else
+            COMPOSE_CMD="docker-compose"
+          fi
+
+          echo "Using $COMPOSE_CMD"
+
+          # Use the detected command with the correct file flag
+          $COMPOSE_CMD -f docker-compose.prod.yml up -d --build --remove-orphans
           
-          # Clean up old images to save space on Oracle
+          # Clean up old images to save space
           docker image prune -f
