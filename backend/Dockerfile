@@ -7,12 +7,14 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt gunicorn
+# Added uvicorn here so gunicorn can use the UvicornWorker class
+RUN pip install --no-cache-dir -r requirements.txt gunicorn uvicorn
 
 COPY . .
 
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
 USER appuser
 
-# CRITICAL FIX: Changed from -w 4 to -w 2 to save RAM on the Oracle Server
-CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:8000", "--timeout", "120", "--access-logfile", "-", "--error-logfile", "-", "main:app"]
+# FIX: Added -k uvicorn.workers.UvicornWorker
+# This translates Gunicorn's management into FastAPI's async language
+CMD ["gunicorn", "-w", "2", "-k", "uvicorn.workers.UvicornWorker", "-b", "0.0.0.0:8000", "--timeout", "120", "--access-logfile", "-", "--error-logfile", "-", "main:app"]
