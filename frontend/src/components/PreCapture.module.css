@@ -153,3 +153,32 @@
   display: none;
 }
 
+@media (max-width: 420px) {
+  .page {
+    justify-content: flex-end; /* push action area toward bottom */
+    padding-bottom: 36px;
+  }
+
+  .scan-guide-container {
+    width: min(360px, 94vw);
+    padding: 28px;
+    gap: 18px;
+  }
+
+  .guide-heading {
+    font-size: 28px;
+  }
+
+  .guide-description {
+    font-size: 14px;
+  }
+
+  .open-camera-button {
+    height: 64px;
+    padding: 20px 24px;
+    font-size: 1rem;
+    border-radius: 999px;
+    max-width: 520px;
+  }
+}
+
