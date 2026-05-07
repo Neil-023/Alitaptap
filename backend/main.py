@@ -83,7 +83,7 @@ async def assess_fire_safety(file: UploadFile = File(...)):
 
         # Request Gemini to analyze with forced JSON output configuration
         response = client.models.generate_content(
-            model="gemini-2.5-flash",
+            model="gemini-3-flash-preview",
             contents=[img, SYSTEM_PROMPT],
             config=types.GenerateContentConfig(
                 response_mime_type="application/json",  # Forces pure JSON, removing markdown codeblocks
