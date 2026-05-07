@@ -12,7 +12,12 @@ app = FastAPI(title="FlameScore AI Backend")
 # 1. Enable CORS Middleware (CRITICAL for React to FastAPI communication)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # During development. Change to your Vercel URL in production.
+    allow_origins=[
+        "https://neil-023.github.io",   # Must include https://
+        "https://alitaptap.mooo.com",  # Your new backend domain
+        "http://localhost:5173",       # For local development
+        "http://localhost:8003",
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
