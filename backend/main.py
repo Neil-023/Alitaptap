@@ -101,3 +101,7 @@ async def assess_fire_safety(file: UploadFile = File(...)):
 @app.get("/")
 def read_root():
     return {"status": "FlameScore API is online!"}
+
+@app.get("/api/health")
+def health_check():
+    return {"status": "healthy"}
