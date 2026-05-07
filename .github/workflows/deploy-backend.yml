@@ -45,17 +45,9 @@ jobs:
           ENVIRONMENT=production
           EOF
 
-          # SMART DOCKER COMPOSE DETECTION
-          if docker compose version >/dev/null 2>&1; then
-            COMPOSE_CMD="docker compose"
-          else
-            COMPOSE_CMD="docker-compose"
-          fi
-
-          echo "Using $COMPOSE_CMD"
-
-          # Use the detected command with the correct file flag
-          $COMPOSE_CMD -f docker-compose.prod.yml up -d --build --remove-orphans
+          # FORCED FIX: We use 'docker compose' (space) to avoid the V1 KeyError.
+          # Added --force-recreate to bypass the 'ContainerConfig' metadata bug.
+          docker compose -f docker-compose.prod.yml up -d --build --force-recreate --remove-orphans
           
-          # Clean up old images to save space
+          # Clean up old images to save space on your limited 480MB RAM server
           docker image prune -f
