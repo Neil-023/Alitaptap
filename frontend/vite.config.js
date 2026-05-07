@@ -4,7 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 
 export default defineConfig({
 
-  base: process.env.VITE_BASE_PATH || '/',
+  base: '/Alitaptap/',
   plugins: [
     react(),
     VitePWA({
