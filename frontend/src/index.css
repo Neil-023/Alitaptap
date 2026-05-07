@@ -1,9 +1,9 @@
 html {
-  -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: none; /* disable browser text autosizing (Chrome on Android) */
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
-  /* base font-size can be increased on very small screens for readability */
-  font-size: 18px;
+  /* Responsive root font-size: ensure minimum on small screens and scale on larger ones */
+  font-size: clamp(18px, 4.5vw, 20px);
 }
 
 :root {
@@ -85,22 +85,18 @@ h2 {
 }
 
 h1 {
-  font-size: 56px;
+  font-size: clamp(32px, 8vw, 56px);
   letter-spacing: -1.68px;
   margin: 32px 0;
   @media (max-width: 1024px) {
-    font-size: 36px;
     margin: 20px 0;
   }
 }
 h2 {
-  font-size: 24px;
+  font-size: clamp(18px, 3.2vw, 24px);
   line-height: 118%;
   letter-spacing: -0.24px;
   margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
 }
 p {
   margin: 0;
@@ -112,6 +108,27 @@ code,
   display: inline-flex;
   border-radius: 4px;
   color: var(--text-h);
+}
+
+/* CTA and button scaling for mobile */
+button,
+.cta,
+.open-camera-button,
+.scanAgainButton {
+  font-size: 1rem;
+}
+
+@media (max-width: 420px) {
+  html {
+    font-size: 20px; /* boost base font-size on very small screens to match expected visual size */
+  }
+  button,
+  .cta,
+  .open-camera-button,
+  .scanAgainButton {
+    font-size: 1.05rem;
+    padding: 14px 22px;
+  }
 }
 
 code {
