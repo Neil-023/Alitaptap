@@ -1,0 +1,35 @@
+# --- Existing Vite/React Defaults ---
+node_modules
+dist
+dist-ssr
+*.local
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.env
+
+# --- Alitaptap Backend (Python) ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+.pytest_cache/
+
+# --- Deployment & Secrets ---
+*.pem
+*.key
+backend/.env
+.github/local_secrets/
+
+# --- Docker ---
+# We usually keep docker-compose.yml but ignore local data volumes
+pgdata/

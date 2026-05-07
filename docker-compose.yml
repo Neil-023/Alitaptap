@@ -1,0 +1,56 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: alitaptap-backend
+    env_file:
+      - ./backend/.env
+    environment:
+      - ENVIRONMENT=production
+    restart: always
+    ports:
+      - "8003:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - alitaptap-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M  # Safe limit for Python+FastAPI
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: alitaptap-frontend
+    restart: always
+    ports:
+      - "3003:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - alitaptap-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 64M  # Nginx needs very little RAM
+        reservations:
+          memory: 32M
+
+networks:
+  alitaptap-network:
+    driver: bridge

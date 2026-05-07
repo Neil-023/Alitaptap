@@ -1,0 +1,52 @@
+name: Deploy Alitaptap Backend
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'backend/**'
+      - 'docker-compose.prod.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-alitaptap-backend
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Copy project via SCP
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.ORACLE_HOST }}
+        username: ubuntu
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        # We only copy the backend folder and the compose file
+        source: "docker-compose.prod.yml,backend"
+        target: "/home/ubuntu/alitaptap"
+
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@v1.2.0
+      with:
+        host: ${{ secrets.ORACLE_HOST }}
+        username: ubuntu
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        script: |
+          set -euo pipefail
+          cd /home/ubuntu/alitaptap
+
+          # Inject secrets into the .env file
+          cat > backend/.env <<EOF
+          GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          ALLOWED_ORIGINS=${{ secrets.ALLOWED_ORIGINS }}
+          ENVIRONMENT=production
+          EOF
+
+          # Standard Docker Compose Deploy
+          docker compose -f docker-compose.prod.yml up -d --build --remove-orphans
+          
+          # Clean up old images to save space on Oracle
+          docker image prune -f

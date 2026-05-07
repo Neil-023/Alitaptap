@@ -1,0 +1,121 @@
+.card {
+  background: rgba(12, 32, 55, 0.95);
+  border: 1px solid #1b3a5c;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 28px rgba(5, 12, 22, 0.45);
+}
+
+.header {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: #f8fafc;
+  font-family: 'Poppins', 'Manrope', sans-serif;
+  text-align: left;
+  cursor: pointer;
+}
+
+.title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: #9fb2c8;
+}
+
+.headerMeta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.badge-high {
+  background: #ff6b6b;
+  color: #2a0c0c;
+}
+
+.badge-medium {
+  background: #f6b44a;
+  color: #2a1b06;
+}
+
+.badge-low {
+  background: #46d39a;
+  color: #062518;
+}
+
+.chevron {
+  color: #9fb2c8;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1;
+}
+
+.body {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0 14px;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.expanded {
+  max-height: 240px;
+  opacity: 1;
+  padding: 0 14px 14px;
+}
+
+.section {
+  margin-top: 12px;
+}
+
+.sectionLabel {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+}
+
+.sectionText {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #e2e8f0;
+}
+
+.checkboxRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: #e2e8f0;
+}
+
+.checkboxRow input {
+  width: 18px;
+  height: 18px;
+  accent-color: #f19e61;
+}

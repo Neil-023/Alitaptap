@@ -1,0 +1,60 @@
+name: Deploy Alitaptap Frontend (PWA)
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'frontend/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: deploy-alitaptap-frontend
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Setup Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Compute Vite base path
+      run: |
+        repo_name="${GITHUB_REPOSITORY#*/}"
+        echo "VITE_BASE_PATH=/${repo_name}/" >> "$GITHUB_ENV"
+
+    - name: Build frontend
+      working-directory: frontend
+      env:
+        # This is your Cloudflare Tunnel or Ngrok URL
+        VITE_API_URL: ${{ secrets.ALITAPTAP_API_URL }}
+      run: |
+        npm ci
+        npm run build
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: frontend/dist
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

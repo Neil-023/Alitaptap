@@ -1,0 +1,54 @@
+.container {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background-color: transparent; /* let page styles control the main gradient */
+  overflow: hidden; /* Prevents scrolling if lights drift past the edge */
+}
+
+.lightsWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none; /* Ensures the lights don't block clicks on buttons below them */
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+}
+
+.light {
+  position: absolute;
+  background-color: #ffca28; /* Warm yellow/gold */
+  border-radius: 50%;
+  opacity: 0;
+  /* Apply BOTH animations using the CSS variables from React */
+  animation: 
+    drift var(--duration) ease-in-out var(--delay) infinite,
+    fade var(--fade-duration) ease-in-out var(--delay) infinite alternate;
+  transform: translateZ(0);
+}
+
+/* Moves the lights in a gentle, randomized path */
+@keyframes drift {
+  0%   { transform: translate(0px, 0px); }
+  33%  { transform: translate(30px, -40px); }
+  66%  { transform: translate(-20px, 30px); }
+  100% { transform: translate(0px, 0px); }
+}
+
+/* Fades the lights in and out, adding a slight glow when fully visible */
+@keyframes fade {
+  0%   { opacity: 0.1; box-shadow: 0 0 0px rgba(255, 202, 40, 0); }
+  100% { opacity: 0.8; box-shadow: 0 0 8px rgba(255, 202, 40, 0.6); }
+}

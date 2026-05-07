@@ -1,0 +1,110 @@
+    /* src/components/Welcome.module.css */
+
+    /* Main Container */
+
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .container {
+        position: relative;
+        min-height: 100vh;
+        width: 100%;
+        background-color: transparent;
+        /* The exact dark blue background */
+        overflow: hidden;
+        /* Keeps the glow and stars from breaking the page */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Center Content (Logo & Text) */
+    .content {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 25vh;
+        /* Pushes the text up to make room for the bottom glow */
+    }
+
+    .logo {
+        width: 150px;
+        height: auto;
+        margin-bottom: 12px;
+    }
+
+    .title {
+        color: #ffffff;
+        font-size: 2.2rem;
+        font-weight: 400;
+        margin: 0;
+        letter-spacing: 0.5px;
+        font-family: 'Poppins', sans-serif; 
+    }
+
+    .subtitle {
+        color: #cbd5e1;
+        font-size: 0.95rem;
+        font-weight: 300;
+        margin-top: 20px;
+        font-weight: 500;
+    }
+
+    /* The Giant Blurry Glow */
+    /* The Giant Blurry Glow */
+.bottomGlow {
+    position: absolute;
+    bottom: -250px; /* Pushes the bottom half of the circle off the screen */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;  /* Fixed width stops it from stretching on desktop */
+    height: 600px; /* Fixed height guarantees a perfect circle */
+    border-radius: 50%; /* Forces the container to be round */
+    background: radial-gradient(circle, rgb(232, 193, 110) 0%, rgb(127, 114, 86) 40%, rgba(10, 35, 66, 0) 70%);
+    filter: blur(30px); /* Increased blur slightly for a smoother gradient edge */
+    z-index: 1;
+    pointer-events: none;
+}
+
+    /* Button Container & Styling */
+    .buttonWrapper {
+        position: absolute;
+        bottom: 40px;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        z-index: 20;
+        padding: 0 24px;
+        box-sizing: border-box;
+    }
+
+    .scanButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        width: 100%;
+        max-width: 360px;
+        background-color: #ffca28;
+        /* Warm yellow */
+        color: #0a2342;
+        /* Dark blue text matching BG */
+        font-size: 1.1rem;
+        font-weight: 800;
+        border: none;
+        border-radius: 50px;
+        padding: 18px 20px;
+        cursor: pointer;
+        box-shadow: 0 4px 25px rgba(255, 202, 40, 0.4);
+        transition: transform 0.1s ease;
+    }
+
+    .scanButton:active {
+        transform: scale(0.96);
+        /* Satisfying click animation */
+    }
