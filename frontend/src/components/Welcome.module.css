@@ -8,7 +8,7 @@
 
     .container {
         position: relative;
-        min-height: 100svh;
+        min-height: 100vh;
         width: 100%;
         background-color: transparent;
         /* The exact dark blue background */
@@ -32,15 +32,15 @@
     }
 
     .logo {
-        width: clamp(110px, 20vw, 150px);
+        width: 150px;
         height: auto;
         margin-bottom: 12px;
     }
 
     .title {
         color: #ffffff;
-        font-size: clamp(28px, 8vw, 40px);
-        font-weight: 600;
+        font-size: 2.2rem;
+        font-weight: 400;
         margin: 0;
         letter-spacing: 0.5px;
         font-family: 'Poppins', sans-serif; 
@@ -48,8 +48,9 @@
 
     .subtitle {
         color: #cbd5e1;
-        font-size: clamp(14px, 3.6vw, 18px);
-        margin-top: 16px;
+        font-size: 0.95rem;
+        font-weight: 300;
+        margin-top: 20px;
         font-weight: 500;
     }
 
@@ -72,15 +73,14 @@
     /* Button Container & Styling */
     .buttonWrapper {
         position: absolute;
-        bottom: calc(16px + env(safe-area-inset-bottom, 16px));
+        bottom: 40px;
         left: 0;
         width: 100%;
         display: flex;
         justify-content: center;
         z-index: 20;
-        padding: 0 20px;
+        padding: 0 24px;
         box-sizing: border-box;
-        pointer-events: auto;
     }
 
     .scanButton {
@@ -89,31 +89,22 @@
         justify-content: center;
         gap: 12px;
         width: 100%;
-        max-width: 420px;
+        max-width: 360px;
         background-color: #ffca28;
+        /* Warm yellow */
         color: #0a2342;
-        font-size: clamp(16px, 3.6vw, 20px);
+        /* Dark blue text matching BG */
+        font-size: 1.1rem;
         font-weight: 800;
         border: none;
-        border-radius: 999px;
-        padding: 16px 24px;
-        min-height: 56px; /* mobile-friendly tap target */
+        border-radius: 50px;
+        padding: 18px 20px;
         cursor: pointer;
-        box-shadow: 0 6px 30px rgba(255, 202, 40, 0.42);
-        transition: transform 0.12s ease, box-shadow 0.12s ease;
+        box-shadow: 0 4px 25px rgba(255, 202, 40, 0.4);
+        transition: transform 0.1s ease;
     }
 
     .scanButton:active {
-        transform: scale(0.975);
+        transform: scale(0.96);
         /* Satisfying click animation */
-    }
-
-    @media (max-width: 420px) {
-        .content {
-            margin-bottom: 18vh;
-        }
-        .title { font-size: clamp(26px, 9.5vw, 34px); }
-        .subtitle { font-size: clamp(13px, 4vw, 16px); }
-        .scanButton { font-size: 18px; padding: 14px 20px; min-height: 58px; }
-        .logo { width: clamp(100px, 18vw, 130px); }
     }
